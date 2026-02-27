@@ -2,7 +2,7 @@ provider "aws" {
     region = "ap-northeast-2"
 }
 module "eks" {
-    source = "./eks
+    source = "./eks/main.tf"
     env = "dev"
     desired_size = 2
     min_size = 1
