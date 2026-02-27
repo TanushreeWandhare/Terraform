@@ -46,7 +46,7 @@ resource "aws_eks_cluster" "my_cluster" {
   version  = "1.34"
 
   vpc_config {
-    subnet_ids = data.aws_subnet.my_subnets.id
+    subnet_ids = data.aws_subnets.my_subnets
   }
 
   depends_on = [
