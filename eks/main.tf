@@ -86,7 +86,7 @@ resource "aws_iam_policy_attachment" "cluster_node_policy_attachment" {
   roles     = [aws_iam_role.node_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
-resource "aws_iam_policy_attachment" "node_policy_attachment" {
+resource "aws_iam_policy_attachment" "node_EC2_policy_attachment" {
   name       = "node_policy_attachment1"
   roles     = [aws_iam_role.node_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
@@ -112,9 +112,9 @@ resource "aws_eks_node_group" "my_node_group" {
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
-    aws_iam_role_policy_attachment.node_policy_attachment,
-    aws_iam_role_policy_attachment.cluster_node_policy_attachment,
-    aws_iam_role_policy_attachment.node_policy_attachment1,
+    aws_iam_policy_attachment.node_policy_attachment,
+    aws_iam_policy_attachment.cluster_node_policy_attachment,
+    aws_iam_policy_attachment.node_EC2_policy_attachment1,
   ]
   timeouts {
     create = "20m"
