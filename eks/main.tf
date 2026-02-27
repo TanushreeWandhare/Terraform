@@ -38,7 +38,7 @@ resource "aws_eks_cluster" "my_cluster" {
   name = "my_cluster"
 
   access_config {
-    authentication_mode = "API"1
+    authentication_mode = "API"
   }
 
 
