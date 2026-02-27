@@ -16,9 +16,9 @@ resource "aws_iam_role" "cluster_role" {
         env = var.env
     }
 }
-resource "aws_iam_policy_attachment" "cluster_policy_attachment" {
-  name       = "cluster_policy_attachment"
-  groups     = [aws_iam_role.cluster_role.name]
+resource "aws_iam_role_policy_attachment" "cluster_policy_attachment" {
+  #name       = "cluster_policy_attachment"
+ role     = aws_iam_role.cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
