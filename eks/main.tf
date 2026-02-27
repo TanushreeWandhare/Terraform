@@ -19,7 +19,7 @@ resource "aws_iam_role" "cluster_role" {
 resource "aws_iam_policy_attachment" "cluster_policy_attachment" {
   name       = "cluster_policy_attachment"
   groups     = [aws_iam_role.cluster_role.name]
-  policy_arn = arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
 data "aws_vpc" "default_vpc" {
@@ -70,10 +70,12 @@ resource "aws_iam_role" "node_role" {
       },
     ]
   })
-}
+
     tags = {
         env = var.env
     }
+}
+
 resource "aws_iam_policy_attachment" "node_policy_attachment" {
   name       = "node_policy_attachment"
   roles     = [aws_iam_role.node_role.name]
@@ -87,7 +89,7 @@ resource "aws_iam_policy_attachment" "cluster_node_policy_attachment" {
 resource "aws_iam_policy_attachment" "node_policy_attachment" {
   name       = "node_policy_attachment1"
   roles     = [aws_iam_role.node_role.name]
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEc2ContainerRegistryReadOnly"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
 resource "aws_eks_node_group" "my_node_group" {
