@@ -86,7 +86,7 @@ resource "aws_iam_policy_attachment" "cluster_node_policy_attachment" {
   roles     = [aws_iam_role.node_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
-resource "aws_iam_policy_attachment" "node_EC2_policy_attachment" {
+resource "aws_iam_policy_attachment" "node_EC2_policy_attachment1" {
   name       = "node_policy_attachment1"
   roles     = [aws_iam_role.node_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
