@@ -9,11 +9,11 @@ rds_username             = "admin"
 rds_password             = "StagingPassword123"  # Change this in production
 
 # EKS Variables
-eks_project            = "cbz"
-eks_desired_nodes      = 2
-eks_max_nodes          = 5
-eks_min_nodes          = 2
-eks_node_instance_type = "t3.small"
+project            = "cbz"
+desired_nodes      = 2
+max_nodes          = 5
+min_nodes          = 2
+node_instance_type = "t3.small"
 
 # S3 Variables
 s3_bucket_name = "cbz-easycrud-b48"
