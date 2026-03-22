@@ -24,7 +24,7 @@ module "rds" {
 */
 
 module "eks" {
-    source = "/modules/eks"
+    source = "modules/eks"
     
     project            = var.eks_project
     desired_nodes      = var.eks_desired_nodes
