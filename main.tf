@@ -24,14 +24,14 @@ module "rds" {
 */
 
 module "eks" {
-    source = "./modules/eks"
+    source = "modules/eks"
     
-    project            = var.eks_project
-    desired_nodes      = var.eks_desired_nodes
-    max_nodes          = var.eks_max_nodes
-    min_nodes          = var.eks_min_nodes
-    node_instance_type = var.eks_node_instance_type
-    environment        = var.environment
+    project            = var.project
+    desired_nodes      = var.desired_nodes
+    max_nodes          = var.max_nodes
+    min_nodes          = var.min_nodes
+    node_instance_type = var.node_instance_type
+    env       = var.env
 }
 /*
 
