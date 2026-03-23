@@ -1,27 +1,49 @@
-provider "aws" {
-    region = "ap-northeast-2" 
+# Create an S3 bucket
+resource "aws_s3_bucket" "cbz_bucket" {
+  bucket = var.bucket_name
+
+  # Enable static website hosting
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
+
+  tags = {
+    Name        = "StaticWebsiteBucket"
+    Environment = var.environment
+  }
 }
 
-resource "aws_s3_bucket" "my_s3" {
-    bucket = "tanu-111"
-}
-resource "s3_bucket_website_configuration" "website" {
-    bucket = aws_s3_bucket.my_s3.id
-  
-    index_document {
-        suffix = "index.html"
-    }
-    error_document {
-        key = "error.html"
-    }
-}
-
+# Disable Block Public Access
 resource "aws_s3_bucket_public_access_block" "example" {
-  bucket = aws_s3_bucket.my_s3.id
+  bucket = aws_s3_bucket.cbz_bucket.bucket
 
-  block_public_acls   = true
-  block_public_policy = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
-output "aws_s3_bucket_website_endpoint" {
-  value       = aws_s3_bucket.my_s3.website_endpoint
+
+# Set the bucket policy to allow public read access (use cautiously)
+resource "aws_s3_bucket_policy" "static_website_policy" {
+  bucket = aws_s3_bucket.cbz_bucket.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:GetObject"
+        Resource  = "${aws_s3_bucket.cbz_bucket.arn}/*"
+      }
+    ]
+  })
+  depends_on = [aws_s3_bucket_public_access_block.example]
+}
+
+# Output the bucket's website endpoint
+output "website_endpoint" {
+  value       = aws_s3_bucket.cbz_bucket.website_endpoint
+  description = "The URL to access the static website"
 }
