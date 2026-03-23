@@ -12,14 +12,14 @@ provider "aws" {
 }
 
 module "rds" {
-    source = "modules/rds"
-    project            = var.eks_project
+    source = "./modules/rds"
+    project            = var.project
     instance_class        = var.rds_instance_class
     allocated_storage     = var.rds_allocated_storage
     max_allocated_storage = var.rds_max_allocated_storage
     username             = var.rds_username
     password             = var.rds_password
-    environment          = var.environment
+    env        = var.env
 }
 
 
@@ -36,8 +36,8 @@ module "eks" {
 
 
 module "s3" {
-    source = "modules/s3"
+    source = "./modules/s3"
     
     bucket_name  = var.s3_bucket_name
-    environment  = var.s3_environment
+    env  = var.s3_env
 }
