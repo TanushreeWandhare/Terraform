@@ -2,18 +2,27 @@
 resource "aws_s3_bucket" "cbz_bucket" {
   bucket = var.bucket_name
 
-  # Enable static website hosting
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-  }
-
-  tags = {
+   tags = {
     Name        = "StaticWebsiteBucket"
     env = var.env
-  
 }
 }
+
+  # Enable static website hosting
+resource "aws_s3_bucket_website_configuration" "website" {
+  bucket = aws_s3_bucket.my_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+
+  error_document {
+    key = "error.html"
+  }
+}
+
+ 
+
 
 # Disable Block Public Access
 resource "aws_s3_bucket_public_access_block" "example" {
