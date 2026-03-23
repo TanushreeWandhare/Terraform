@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "cbz_bucket" {
 
   # Enable static website hosting
 resource "aws_s3_bucket_website_configuration" "website" {
-  bucket = aws_s3_bucket.my_bucket.id
+  bucket = aws_s3_bucket.cbz_bucket.id
 
   index_document {
     suffix = "index.html"
@@ -54,6 +54,6 @@ resource "aws_s3_bucket_policy" "static_website_policy" {
 
 # Output the bucket's website endpoint
 output "website_endpoint" {
-  value       = aws_s3_bucket.cbz_bucket.website_endpoint
+  value       = aws_s3_bucket_website_configuration.website.website_endpoint
   description = "The URL to access the static website"
 }
