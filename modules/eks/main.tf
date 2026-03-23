@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "eks_service_policy" {
 
 
 # Create an IAM Role for the Node Group
-resource "aws_iam_role" "eks_node_role" {
+resource "aws_iam_role" "eks_node_role-t" {
   name = "eks-node-role-${var.project}"
 
   assume_role_policy = jsonencode({
@@ -51,17 +51,17 @@ resource "aws_iam_role" "eks_node_role" {
 
 # Attach necessary policies to the Node Group IAM Role
 resource "aws_iam_role_policy_attachment" "eks_worker_node_policy" {
-  role       = aws_iam_role.eks_node_role.name
+  role       = aws_iam_role.eks_node_role-t.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
 resource "aws_iam_role_policy_attachment" "eks_cni_policy" {
-  role       = aws_iam_role.eks_node_role.name
+  role       = aws_iam_role.eks_node_role-t.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
 resource "aws_iam_role_policy_attachment" "ec2_container_policy" {
-  role       = aws_iam_role.eks_node_role.name
+  role       = aws_iam_role.eks_node_role-t.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
@@ -101,7 +101,7 @@ resource "aws_eks_cluster" "cbz_cluster" {
 resource "aws_eks_node_group" "cbz_nodegroup" {
   cluster_name    = aws_eks_cluster.cbz_cluster.name
   node_group_name = "${var.project}-node-group-${var.env}"
-  node_role_arn   = aws_iam_role.eks_node_role.arn
+  node_role_arn   = aws_iam_role.eks_node_role-t.arn
   subnet_ids      = data.aws_subnets.default.ids
 
   scaling_config {
