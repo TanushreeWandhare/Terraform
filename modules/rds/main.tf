@@ -49,7 +49,7 @@ resource "aws_db_instance" "cbz_db_instance" {
   parameter_group_name = "default.mysql8.0"
   publicly_accessible  = true
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
-  db_subnet_group_name = aws_db_subnet_group.default.name
+  db_subnet_group_name = aws_db_subnet_group-t.default.name
   skip_final_snapshot  = true
   tags = {
     Name        = "cbz-db-instance"
@@ -58,7 +58,7 @@ resource "aws_db_instance" "cbz_db_instance" {
 }
 
 # Create a DB Subnet Group using default subnets
-resource "aws_db_subnet_group" "default" {
+resource "aws_db_subnet_group-t" "default" {
   name       = "${var.project}-${var.env}-db-subnet-group"
   subnet_ids = data.aws_subnets.default.ids
   tags = {
