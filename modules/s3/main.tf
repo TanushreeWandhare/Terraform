@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "cbz_bucket" {
 
    tags = {
     Name        = "StaticWebsiteBucket"
-    env = var.env
+    Environment = var.env
 }
 }
 
