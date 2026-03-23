@@ -68,7 +68,7 @@ variable "s3_bucket_name" {
   type        = string
 }
 
-variable "s3_environment" {
+variable "s3_env" {
   description = "Environment tag for S3 bucket"
   type        = string
 } 

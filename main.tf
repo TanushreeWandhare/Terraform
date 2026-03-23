@@ -1,16 +1,16 @@
-/*terraform {
+terraform {
     backend "s3" {
         bucket = "cbz-terraform-b48"
         region = "ap-northeast-2"
         key = "terraform.tfstate"
     }
 }
-*/
+
 
 provider "aws" {
     region = var.aws_region
 }
-/*
+
 module "rds" {
     source = "modules/rds"
     project            = var.eks_project
@@ -21,7 +21,7 @@ module "rds" {
     password             = var.rds_password
     environment          = var.environment
 }
-*/
+
 
 module "eks" {
     source = "./modules/eks"
@@ -33,7 +33,7 @@ module "eks" {
     node_instance_type = var.node_instance_type
     env       = var.env
 }
-/*
+
 
 module "s3" {
     source = "modules/s3"
@@ -41,4 +41,3 @@ module "s3" {
     bucket_name  = var.s3_bucket_name
     environment  = var.s3_environment
 }
-*/
