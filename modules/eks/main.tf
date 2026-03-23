@@ -77,8 +77,8 @@ data "aws_vpc" "default_vpc" {
  }
 
  
-resource "aws_eks_cluster" "my_cluster" {
-  name = "$(var.project)-my_cluster-$(var.env)"
+resource "aws_eks_cluster" "cbz_cluster" {
+  name = "$(var.project)-cbz_cluster-$(var.env)"
   role_arn = aws_iam_role.cluster_role.arn
 
   vpc_config {
