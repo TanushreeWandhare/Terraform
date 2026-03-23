@@ -24,7 +24,7 @@ variable "password" {
   sensitive   = true
 }
 
-variable "environment" {
+variable "env" {
   description = "Environment name"
   type        = string
 } 

@@ -33,7 +33,7 @@ resource "aws_security_group" "rds_sg" {
   }
   tags = {
     Name        = "rds-sg"
-    Environment = var.environment
+    env = var.env
   }
 }
 
@@ -53,7 +53,7 @@ resource "aws_db_instance" "cbz_db_instance" {
   skip_final_snapshot  = true
   tags = {
     Name        = "cbz-db-instance"
-    Environment = var.environment
+    env = var.env
   }
 }
 
@@ -63,6 +63,6 @@ resource "aws_db_subnet_group" "default" {
   subnet_ids = data.aws_subnets.default.ids
   tags = {
     Name        = "default-db-subnet-group"
-    Environment = var.environment
+    env = var.env
   }
 }

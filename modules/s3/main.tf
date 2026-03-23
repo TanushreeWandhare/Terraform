@@ -10,8 +10,9 @@ resource "aws_s3_bucket" "cbz_bucket" {
 
   tags = {
     Name        = "StaticWebsiteBucket"
-    Environment = var.environment
-  }
+    env = var.env
+  
+}
 }
 
 # Disable Block Public Access
