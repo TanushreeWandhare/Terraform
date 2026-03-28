@@ -1,5 +1,5 @@
 # Create an S3 bucket
-resource "aws_s3_bucket" "cbz_bucket" {
+resource "aws_s3_bucket" "tanu_bucket-111" {
   bucket = var.bucket_name
 
    tags = {
