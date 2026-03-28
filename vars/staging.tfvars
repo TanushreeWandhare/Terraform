@@ -16,5 +16,5 @@ min_nodes          = 2
 node_instance_type = "t3.small"
 
 # S3 Variables
-s3_bucket_name = "cbz-easycrud-tanu"
+s3_bucket_name = "easycrud-tanu"
 s3_env = "staging" 
