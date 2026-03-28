@@ -6,7 +6,7 @@ variable "env" {
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "ap-northeast-2"
+  default     = "ap-southeast-2"
 }
 
 # RDS Variables
